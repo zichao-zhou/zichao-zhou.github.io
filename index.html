@@ -2,52 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Personal Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-top: 0;
-    }
-
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #007acc;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    a:hover {
-      background: #005fa3;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Personal Site</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>Hi, I'm [Your Name]!</h1>
-  <p>Welcome to my personal website hosted with GitHub Pages.</p>
-  <a href="https://github.com/yourusername" target="_blank">Visit my GitHub</a>
+  <div class="container">
+    <h1>Hello, I'm [Your Name]</h1>
+    <p>Welcome to my personal site!</p>
+
+    <h2>📷 My Profile Picture</h2>
+    <img src="images/profile.jpg" alt="Profile photo" class="profile-img" />
+
+    <h2>📄 Resume</h2>
+    <a href="pdfs/resume.pdf" target="_blank" class="button">View My Resume (PDF)</a>
+
+    <h2>📝 My Blog</h2>
+    <p>Check out my external blog here:</p>
+    <a href="https://yourblog.com" target="_blank" class="button">Visit My Blog</a>
+  </div>
 </body>
 </html>
