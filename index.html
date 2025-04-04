@@ -2,24 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Personal Site</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My First Website</title>
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Hello, I'm [Your Name]</h1>
-    <p>Welcome to my personal site!</p>
 
-    <h2>📷 My Profile Picture</h2>
-    <img src="images/profile.jpg" alt="Profile photo" class="profile-img" />
 
-    <h2>📄 Resume</h2>
-    <a href="pdfs/resume.pdf" target="_blank" class="button">View My Resume (PDF)</a>
 
-    <h2>📝 My Blog</h2>
-    <p>Check out my external blog here:</p>
-    <a href="https://yourblog.com" target="_blank" class="button">Visit My Blog</a>
-  </div>
+  <div class="center">
+  <!-- Header (usually site title or nav bar) -->
+
+  <!-- Full-screen time section -->
+  <section id="hero-time">
+    <div id="user-time-section">
+        <p id="user-time">Detecting your timezone...</p>
+    </div>
+  </section>
+  
+  <!-- Main content area -->
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>Hello! I am a hamster and I publish my course notes here.</p>
+      <p>\(\frac{d}{dx}...\)</p>
+    </section>
+
+    <section>
+        <h2> Course Notes </h2>
+        <details>
+          <summary>MATH0060</summary>
+          <ul>
+          <li><a href="stochastic.pdf" target="_blank">lecture notes</a></li>
+          </ul>
+        </details>
+  
+      </section>
+
+      
+
+    <section>
+      <h2>what I saw</h2>
+      <img src="orange_new_moon.jpg" alt="A cat" class="square-image" />
+    </section>
+
+    <section>
+        <h2>What I Saw</h2>
+        
+        <!-- Thumbnail (click it to open lightbox) -->
+        <a href="#img1">
+          <img src="orange_new_moon.jpg" alt="A cat" class="small-image" />
+        </a>
+        
+        <!-- Lightbox (hidden by default) -->
+        <div class="lightbox" id="img1">
+          <!-- Close button: 
+               Navigating to "#" means no ID, removing the :target state -->
+          <a href="#" class="close">&times;</a>
+          
+          <!-- Full-size image -->
+          <img src="orange_new_moon.jpg" alt="Full-size cat" />
+        </div>
+      </section>
+
+
+
+      
+
+
+  </main>
+
+  
+  <script>
+    async function fetchAccurateTime() {
+      try {
+        const response = await fetch('https://worldtimeapi.org/api/timezone/Etc/UTC');
+        const data = await response.json();
+        const date = new Date(data.datetime);
+        
+        const hours = String(date.getUTCHours()).padStart(2, '0');
+        const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+        const timeString = `${hours}:${minutes}:${seconds} UTC`;
+  
+        document.getElementById("accurate-time").textContent = timeString;
+      } catch (error) {
+        document.getElementById("accurate-time").textContent = "Failed to fetch time.";
+        console.error("Time fetch error:", error);
+      }
+    }
+  
+    fetchAccurateTime();
+    setInterval(fetchAccurateTime, 1000); // Update every second
+  </script>
+
+
+  
+</div>
+
+    <!-- Footer (bottom of the page) -->
+    <footer>
+        <p>&copy; 2025 Hamster limited</p>
+      </footer>
+  
+  <script>
+    const timeDisplay = document.getElementById("user-time");
+  
+    // Step 1: Start showing system/local time immediately
+    function updateLocalTime() {
+      const now = new Date();
+      const localTime = now.toLocaleTimeString();
+      timeDisplay.textContent = `${localTime}`;
+    }
+  
+    const localTimer = setInterval(updateLocalTime, 1000);
+    updateLocalTime();
+  
+    // Step 2: Get timezone from IP, then show accurate time
+    async function getAccurateTime() {
+      try {
+        // Get timezone from IP address
+        const ipRes = await fetch('https://ipapi.co/json/');
+
+        if (!ipRes.ok) {
+            throw new Error(`ipapi.co error: ${ipRes.status}`);
+        }
+        const ipData = await ipRes.json();
+
+
+
+        const timezone = ipData.timezone;
+  
+        // Function to update the accurate time
+        async function updateAccurateTime() {
+          const res = await fetch(`https://worldtimeapi.org/api/timezone/${timezone}`);
+          const data = await res.json();
+          const date = new Date(data.datetime);
+  
+          const hours = String(date.getHours()).padStart(2, '0');
+          const minutes = String(date.getMinutes()).padStart(2, '0');
+          const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+          timeDisplay.textContent = `${timezone}${hours}:${minutes}:${seconds}`;
+        }
+  
+        // Stop the local time once we switch
+        clearInterval(localTimer);
+  
+        // Start accurate time updates
+        updateAccurateTime();
+        setInterval(updateAccurateTime, 1000);
+  
+      } catch (err) {
+        console.error("Error getting accurate time:", err);
+        timeDisplay.textContent = " TIME ";
+      }
+    }
+  
+    getAccurateTime();
+  </script>
+
+
+  
+  
+  
+  
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']], // lets you use $...$ or \(...\)
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+        <!-- Link to external JS file (put it right before closing body tag) -->
+  <script src="script.js"></script>
+
 </body>
 </html>
+
+
+
+
+
+  
